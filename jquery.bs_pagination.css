@@ -1,0 +1,42 @@
+/*
+DO NOT CHANGE this file, as it will be overwritten in next update.
+Write your own classes in other css file.
+*/
+
+/* bootstrap "xs": Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+
+.row-space {
+    margin-top: 15px;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.small-input {
+    width: 50px;
+}
+
+/* bootstrap "sm": Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .row-space {
+        margin-top: 15px;
+    }
+}
+
+/* bootstrap "md": Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .row-space {
+        margin-top: 0;
+    }
+}
+
+/* bootstrap "lg": Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+    .row-space {
+        margin-top: 0;
+    }
+}
+/* -------------------------------------------------------------------------- */
