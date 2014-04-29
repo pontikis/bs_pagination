@@ -1,0 +1,51 @@
+/*
+DO NOT CHANGE this file, as it will be overwritten in next update.
+Write your own classes in other css file.
+*/
+
+.pagination_custom {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.goto_page_wrapper {
+    display: inline;
+}
+
+.rows_per_page_wrapper {
+    display: inline;
+    margin-left: 5%;
+}
+
+.small-input {
+    width: 20% !important;
+}
+
+/* Large desktop */
+@media (min-width: 1200px) {
+    .row-space {
+        margin-top: 0 !important;
+    }
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+    .row-space {
+        margin-top: 0 !important;
+    }
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+    .row-space {
+        margin-top: 15px !important;
+    }
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+    .row-space {
+        margin-top: 15px !important;
+    }
+}
+/* -------------------------------------------------------------------------- */
