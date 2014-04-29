@@ -3,7 +3,7 @@
  *               <p>License MIT
  *               <br />Copyright Christos Pontikis <a href="http://pontikis.net">http://pontikis.net</a>
  *               <br />Project page <a href="http://www.pontikis.net/labs/bs_pagination">http://www.pontikis.net/labs/bs_pagination</a>
- * @version 1.0.0 (29 Apr 2014)
+ * @version 1.0.1 (29 Apr 2014)
  * @author Christos Pontikis http://www.pontikis.net
  * @requires jquery >= 1.8, twitter bootstrap >= 2
  */
@@ -88,9 +88,8 @@
                     selector_go_to_page, selector_rows_per_page;
 
                 /* CREATE NAV PANEL ----------------------------------------- */
-                html += '<div class="row">';
-
                 if(settings.bootstrap_version == "3") {
+                    html += '<div class="' + settings.mainWrapperClass + '">';
 
                     html += '<div class="' + settings.navListContainerClass + '">';
                     html += '<div class="' + settings.navListWrapperClass + '">';
@@ -122,6 +121,7 @@
                     }
 
                 } else {
+                    html += '<div class="' + settings.mainWrapperClass2 + '">';
 
                     html += '<div class="' + settings.navListContainerClass2 + '">';
                     html += '<div class="' + settings.navListWrapperClass2 + '">';
@@ -342,6 +342,8 @@
                 // bootstrap 3
                 containerClass: 'well',
 
+                mainWrapperClass: 'row',
+
                 navListContainerClass: 'col-xs-12 col-sm-12 col-md-6',
                 navListWrapperClass: '',
                 navListClass: 'pagination pagination_custom',
@@ -361,12 +363,14 @@
                 // bootstrap 2
                 containerClass2: 'well',
 
+                mainWrapperClass2: 'row-fluid',
+
                 navListContainerClass2: 'span6',
                 navListWrapperClass2: 'pagination pagination_custom',
                 navListClass2: '',
                 navListActiveItemClass2: 'active',
 
-                navInputsContainerClass2: 'span3 row-space',
+                navInputsContainerClass2: 'span4 row-space',
                 navGoToPageWrapperClass2: 'input-prepend goto_page_wrapper',
                 navGoToPageIconClass2: 'icon-arrow-right',
                 navGoToPageClass2: 'small-input',

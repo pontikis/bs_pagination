@@ -12,6 +12,10 @@ Copyright Christos Pontikis [http://www.pontikis.net][copyright]
 License [MIT][mit]
 [mit]: https://raw.github.com/pontikis/bs_pagination/master/MIT_LICENSE
 
+Release 1.0.1 (29 Apr 2014)
+---------------------------
+* Improve Bootstrap 2 version
+
 Release 1.0.0 (29 Apr 2014)
 ---------------------------
 * Added support for Bootstrap 2

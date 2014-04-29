@@ -10,7 +10,7 @@ Copyright [Christos Pontikis][copyright]
 
 Requires jquery >= 1.8 , bootstrap >= 2
 
-Release: 1.0.0 (29 Apr 2014)
+Release: 1.0.1 (29 Apr 2014)
 
 License [MIT][mit]
 [mit]: https://raw.github.com/pontikis/bs_pagination/master/MIT_LICENSE
