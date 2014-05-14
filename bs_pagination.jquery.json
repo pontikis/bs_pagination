@@ -16,7 +16,7 @@
     "dependencies": {
         "jquery": ">=1.8"
     },
-    "description": "jQuery plugin, provides pagination using page links or jQuery UI slider. Fully configurable. jQuery UI themes compatible. Localization support.",
+    "description": "bs_pagination is a jQuery pagination plugin, based on Twitter Bootstrap. Fully configurable, responsive web design.",
     "homepage": "http://www.pontikis.net/labs/bs_pagination",
     "docs": "http://www.pontikis.net/labs/bs_pagination/docs",
     "demo": "http://www.pontikis.net/labs/bs_pagination/demo",
@@ -25,7 +25,9 @@
         "pagination",
         "paginate",
         "bootstrap",
+        "responsive",
         "grid",
+        "datagrid",
         "ui"
     ],
     "bugs": "https://github.com/pontikis/bs_pagination/issues"
