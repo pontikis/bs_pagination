@@ -3,7 +3,7 @@
  *               <p>License MIT
  *               <br />Copyright Christos Pontikis <a href="http://pontikis.net">http://pontikis.net</a>
  *               <br />Project page <a href="http://www.pontikis.net/labs/bs_pagination">http://www.pontikis.net/labs/bs_pagination</a>
- * @version 1.0.1 (29 Apr 2014)
+ * @version 1.0.2 (09 May 2014)
  * @author Christos Pontikis http://www.pontikis.net
  * @requires jquery >= 1.8, twitter bootstrap >= 2
  */
@@ -34,7 +34,7 @@
 "use strict";
 (function($) {
 
-    var pluginName = 'bs_pagination';
+    var pluginName = "bs_pagination";
 
     /* public methods ------------------------------------------------------- */
     var methods = {
@@ -53,8 +53,12 @@
                  * using $.extend, settings modification will affect elem.data() and vice versa
                  */
                 var settings = elem.data(pluginName);
-                if(typeof(settings) == 'undefined') {
-                    var defaults = elem.bs_pagination('getDefaults');
+                if(typeof settings == "undefined") {
+                    var bootstrap_version = "3";
+                    if(options.hasOwnProperty("bootstrap_version") && options["bootstrap_version"] == "2") {
+                        bootstrap_version = "2";
+                    }
+                    var defaults = methods.getDefaults.call(elem, bootstrap_version);
                     settings = $.extend({}, defaults, options);
                 } else {
                     settings = $.extend({}, settings, options);
@@ -74,7 +78,7 @@
                     nav_list_id = create_id(settings.nav_list_id_prefix, container_id),
                     nav_top_id = create_id(settings.nav_top_id_prefix, container_id),
                     nav_prev_id = create_id(settings.nav_prev_id_prefix, container_id),
-                    nav_item_id_prefix = create_id(settings.nav_item_id_prefix, container_id) + '_',
+                    nav_item_id_prefix = create_id(settings.nav_item_id_prefix, container_id) + "_",
                     nav_next_id = create_id(settings.nav_next_id_prefix, container_id),
                     nav_last_id = create_id(settings.nav_last_id_prefix, container_id),
 
@@ -82,7 +86,7 @@
                     rows_per_page_id = create_id(settings.nav_rows_per_page_id_prefix, container_id),
                     rows_info_id = create_id(settings.nav_rows_info_id_prefix, container_id),
 
-                    html = '',
+                    html = "",
                     previous_selection, current_selection,
                     selector_nav_top, selector_nav_prev, selector_nav_pages, selector_nav_next, selector_nav_last,
                     selector_go_to_page, selector_rows_per_page;
@@ -121,29 +125,29 @@
                     }
 
                 } else {
-                    html += '<div class="' + settings.mainWrapperClass2 + '">';
+                    html += '<div class="' + settings.mainWrapperClass + '">';
 
-                    html += '<div class="' + settings.navListContainerClass2 + '">';
-                    html += '<div class="' + settings.navListWrapperClass2 + '">';
-                    html += '<ul id="' + nav_list_id + '" class="' + settings.navListClass2 + '">';
+                    html += '<div class="' + settings.navListContainerClass + '">';
+                    html += '<div class="' + settings.navListWrapperClass + '">';
+                    html += '<ul id="' + nav_list_id + '" class="' + settings.navListClass + '">';
                     html += '</ul>';
                     html += '</div>';
                     html += '</div>';
 
                     if((settings.showGoToPage && settings.visiblePageLinks < settings.totalPages) || settings.showRowsPerPage) {
 
-                        html += '<div class="' + settings.navInputsContainerClass2 + '">';
+                        html += '<div class="' + settings.navInputsContainerClass + '">';
 
                         if(settings.showGoToPage && settings.visiblePageLinks < settings.totalPages) {
-                            html += '<div class="' + settings.navGoToPageWrapperClass2 + '">';
-                            html += '<span class="add-on" title="' + rsc_bs_pag.go_to_page_title + '"><i class="' + settings.navGoToPageIconClass2 + '"></i></span>';
-                            html += '<input id="' + goto_page_id + '" type="text" class="' + settings.navGoToPageClass2 + '" title="' + rsc_bs_pag.go_to_page_title + '">';
+                            html += '<div class="' + settings.navGoToPageWrapperClass + '">';
+                            html += '<span class="add-on" title="' + rsc_bs_pag.go_to_page_title + '"><i class="' + settings.navGoToPageIconClass + '"></i></span>';
+                            html += '<input id="' + goto_page_id + '" type="text" class="' + settings.navGoToPageClass + '" title="' + rsc_bs_pag.go_to_page_title + '">';
                             html += '</div>';
                         }
                         if(settings.showRowsPerPage) {
-                            html += '<div class="' + settings.navRowsPerPageWrapperClass2 + '">';
-                            html += '<span class="add-on" title="' + rsc_bs_pag.rows_per_page_title + '"><i class="' + settings.navRowsPerPageIconClass2 + '"></i></span>';
-                            html += '<input id="' + rows_per_page_id + '" value="' + settings.rowsPerPage + '" type="text" class="' + settings.navRowsPerPageClass2 + '" title="' + rsc_bs_pag.rows_per_page_title + '">';
+                            html += '<div class="' + settings.navRowsPerPageWrapperClass + '">';
+                            html += '<span class="add-on" title="' + rsc_bs_pag.rows_per_page_title + '"><i class="' + settings.navRowsPerPageIconClass + '"></i></span>';
+                            html += '<input id="' + rows_per_page_id + '" value="' + settings.rowsPerPage + '" type="text" class="' + settings.navRowsPerPageClass + '" title="' + rsc_bs_pag.rows_per_page_title + '">';
                             html += '</div>';
                         }
 
@@ -151,12 +155,11 @@
                     }
 
                     if(settings.showRowsInfo) {
-                        html += '<div class="' + settings.navInfoContainerClass2 + '">';
-                        html += '<div id="' + rows_info_id + '" class="' + settings.navInfoClass2 + '"></div>';
+                        html += '<div class="' + settings.navInfoContainerClass + '">';
+                        html += '<div id="' + rows_info_id + '" class="' + settings.navInfoClass + '"></div>';
                         html += '</div>';
                     }
                 }
-
 
                 html += '</div>';
 
@@ -168,19 +171,14 @@
                 change_page(container_id, previous_selection, current_selection, true, false);
 
                 // apply style
-                if(settings.bootstrap_version == "3") {
-                    elem.removeClass().addClass(settings.containerClass);
-                } else {
-                    elem.removeClass().addClass(settings.containerClass2);
-                }
-
+                elem.removeClass().addClass(settings.containerClass);
 
                 // panel events ------------------------------------------------
                 if(!settings.directURL) {
 
                     // click on go to top
                     selector_nav_top = "#" + nav_top_id;
-                    elem.off('click', selector_nav_top).on('click', selector_nav_top, function() {
+                    elem.off("click", selector_nav_top).on("click", selector_nav_top, function() {
                         var previous_selection = settings.currentPage;
                         settings.currentPage = 1;
                         var current_selection = settings.currentPage;
@@ -189,31 +187,31 @@
 
                     // click on go to prev
                     selector_nav_prev = "#" + nav_prev_id;
-                    elem.off('click', selector_nav_prev).on('click', selector_nav_prev, function() {
+                    elem.off("click", selector_nav_prev).on("click", selector_nav_prev, function() {
                         if(settings.currentPage > 1) {
                             var previous_selection = settings.currentPage;
                             settings.currentPage = parseInt(settings.currentPage) - 1;
                             var current_selection = settings.currentPage;
-                            var recreate_nav = (elem.data('nav_start') == previous_selection);
+                            var recreate_nav = (elem.data("nav_start") == previous_selection);
                             change_page(container_id, previous_selection, current_selection, recreate_nav, true);
                         }
                     });
 
                     // click on go to next
                     selector_nav_next = "#" + nav_next_id;
-                    elem.off('click', selector_nav_next).on('click', selector_nav_next, function() {
+                    elem.off("click", selector_nav_next).on("click", selector_nav_next, function() {
                         if(settings.currentPage < settings.totalPages) {
                             var previous_selection = settings.currentPage;
                             settings.currentPage = parseInt(settings.currentPage) + 1;
                             var current_selection = settings.currentPage;
-                            var recreate_nav = (elem.data('nav_end') == previous_selection);
+                            var recreate_nav = (elem.data("nav_end") == previous_selection);
                             change_page(container_id, previous_selection, current_selection, recreate_nav, true);
                         }
                     });
 
                     // click on go to last
                     selector_nav_last = "#" + nav_last_id;
-                    elem.off('click', selector_nav_last).on('click', selector_nav_last, function() {
+                    elem.off("click", selector_nav_last).on("click", selector_nav_last, function() {
                         var previous_selection = settings.currentPage;
                         settings.currentPage = parseInt(settings.totalPages);
                         var current_selection = settings.currentPage;
@@ -222,7 +220,7 @@
 
                     // click on nav page item
                     selector_nav_pages = '[id^="' + nav_item_id_prefix + '"]';
-                    elem.off('click', selector_nav_pages).on('click', selector_nav_pages, function(event) {
+                    elem.off("click", selector_nav_pages).on("click", selector_nav_pages, function(event) {
                         var previous_selection = settings.currentPage;
                         var len = nav_item_id_prefix.length;
                         settings.currentPage = parseInt($(event.target).attr("id").substr(len));
@@ -234,10 +232,10 @@
                 // go to page event
                 if(settings.showGoToPage) {
                     selector_go_to_page = "#" + goto_page_id;
-                    elem.off('keypress', selector_go_to_page).on('keypress', selector_go_to_page, function(event) {
+                    elem.off("keypress", selector_go_to_page).on("keypress", selector_go_to_page, function(event) {
                         if(event.which === 13) {
                             var gtp = parseInt($(selector_go_to_page).val());
-                            $(selector_go_to_page).val('');
+                            $(selector_go_to_page).val("");
                             if(!isNaN(gtp) && gtp > 0) {
 
                                 if(gtp > settings.totalPages) {
@@ -267,7 +265,7 @@
                 // rows per page event
                 if(settings.showRowsPerPage) {
                     selector_rows_per_page = "#" + rows_per_page_id;
-                    elem.off('keypress', selector_rows_per_page).on('keypress', selector_rows_per_page, function(event) {
+                    elem.off("keypress", selector_rows_per_page).on("keypress", selector_rows_per_page, function(event) {
                         if(event.which === 13) {
                             var rpp = parseInt($(selector_rows_per_page).val());
                             if(!isNaN(rpp) && rpp > 0) {
@@ -311,16 +309,17 @@
          * @returns {string}
          */
         getVersion: function() {
-            return '1.0.0';
+            return "1.0.2";
         },
 
         /**
          * Get default values
-         * @example $(element).bs_pagination('getDefaults');
-         * @return {Object}
+         * @example $(element).bs_pagination("getDefaults", "3");
+         * @param bootstrap_version
+         * @returns {Object}
          */
-        getDefaults: function() {
-            return {
+        getDefaults: function(bootstrap_version) {
+            var default_settings = {
                 currentPage: 1,
                 rowsPerPage: 10,
                 maxRowsPerPage: 100,
@@ -337,72 +336,77 @@
                 directURL: false, // or a function with current page as argument
                 disableTextSelectionInNavPane: true, // disable text selection and double click
 
-                bootstrap_version: "3", // one of "3", "2"
+                bootstrap_version: "3",
 
                 // bootstrap 3
-                containerClass: 'well',
+                containerClass: "well",
 
-                mainWrapperClass: 'row',
+                mainWrapperClass: "row",
 
-                navListContainerClass: 'col-xs-12 col-sm-12 col-md-6',
-                navListWrapperClass: '',
-                navListClass: 'pagination pagination_custom',
-                navListActiveItemClass: 'active',
+                navListContainerClass: "col-xs-12 col-sm-12 col-md-6",
+                navListWrapperClass: "",
+                navListClass: "pagination pagination_custom",
+                navListActiveItemClass: "active",
 
-                navGoToPageContainerClass: 'col-xs-6 col-sm-4 col-md-2 row-space',
-                navGoToPageIconClass: 'glyphicon glyphicon-arrow-right',
-                navGoToPageClass: 'form-control small-input',
+                navGoToPageContainerClass: "col-xs-6 col-sm-4 col-md-2 row-space",
+                navGoToPageIconClass: "glyphicon glyphicon-arrow-right",
+                navGoToPageClass: "form-control small-input",
 
-                navRowsPerPageContainerClass: 'col-xs-6 col-sm-4 col-md-2 row-space',
-                navRowsPerPageIconClass: 'glyphicon glyphicon-th-list',
-                navRowsPerPageClass: 'form-control small-input',
+                navRowsPerPageContainerClass: "col-xs-6 col-sm-4 col-md-2 row-space",
+                navRowsPerPageIconClass: "glyphicon glyphicon-th-list",
+                navRowsPerPageClass: "form-control small-input",
 
-                navInfoContainerClass: 'col-xs-12 col-sm-4 col-md-2 row-space',
-                navInfoClass: '',
-
-                // bootstrap 2
-                containerClass2: 'well',
-
-                mainWrapperClass2: 'row-fluid',
-
-                navListContainerClass2: 'span6',
-                navListWrapperClass2: 'pagination pagination_custom',
-                navListClass2: '',
-                navListActiveItemClass2: 'active',
-
-                navInputsContainerClass2: 'span4 row-space',
-                navGoToPageWrapperClass2: 'input-prepend goto_page_wrapper',
-                navGoToPageIconClass2: 'icon-arrow-right',
-                navGoToPageClass2: 'small-input',
-                navRowsPerPageWrapperClass2: 'input-prepend rows_per_page_wrapper',
-                navRowsPerPageIconClass2: 'icon-th-list',
-                navRowsPerPageClass2: 'small-input',
-
-                navInfoContainerClass2: 'span2 row-space',
-                navInfoClass2: '',
+                navInfoContainerClass: "col-xs-12 col-sm-4 col-md-2 row-space",
+                navInfoClass: "",
 
                 // element IDs
-                nav_list_id_prefix: 'nav_list_',
-                nav_top_id_prefix: 'top_',
-                nav_prev_id_prefix: 'prev_',
-                nav_item_id_prefix: 'nav_item_',
-                nav_next_id_prefix: 'next_',
-                nav_last_id_prefix: 'last_',
+                nav_list_id_prefix: "nav_list_",
+                nav_top_id_prefix: "top_",
+                nav_prev_id_prefix: "prev_",
+                nav_item_id_prefix: "nav_item_",
+                nav_next_id_prefix: "next_",
+                nav_last_id_prefix: "last_",
 
-                nav_goto_page_id_prefix: 'goto_page_',
-                nav_rows_per_page_id_prefix: 'rows_per_page_',
-                nav_rows_info_id_prefix: 'rows_info_',
+                nav_goto_page_id_prefix: "goto_page_",
+                nav_rows_per_page_id_prefix: "rows_per_page_",
+                nav_rows_info_id_prefix: "rows_info_",
 
                 onChangePage: function() { // returns page_num and rows_per_page after a link has clicked
                 },
                 onLoad: function() { // returns page_num and rows_per_page on plugin load
                 }
             };
+
+            if(bootstrap_version == "2") {
+                default_settings.bootstrap_version = "2";
+
+                default_settings.containerClass = "well";
+
+                default_settings.mainWrapperClass = "row-fluid";
+
+                default_settings.navListContainerClass = "span6";
+                default_settings.navListWrapperClass = "pagination pagination_custom";
+                default_settings.navListClass = "";
+                default_settings.navListActiveItemClass = "active";
+
+                default_settings.navInputsContainerClass = "span4 row-space";
+                default_settings.navGoToPageWrapperClass = "input-prepend goto_page_wrapper";
+                default_settings.navGoToPageIconClass = "icon-arrow-right";
+                default_settings.navGoToPageClass = "small-input";
+                default_settings.navRowsPerPageWrapperClass = "input-prepend rows_per_page_wrapper";
+                default_settings.navRowsPerPageIconClass = "icon-th-list";
+                default_settings.navRowsPerPageClass = "small-input";
+
+                default_settings.navInfoContainerClass = "span2 row-space";
+                default_settings.navInfoClass = "";
+            }
+
+            return default_settings;
         },
 
         /**
          * Get any option set to plugin using its name (as string)
-         * @example $(element).bs_pagination('getOption', some_option);
+         * @example $(element).bs_pagination("getOption", some_option);
          * @param opt
          * @return {*}
          */
@@ -413,7 +417,7 @@
 
         /**
          * Get all options
-         * @example $(element).bs_pagination('getAllOptions');
+         * @example $(element).bs_pagination("getAllOptions");
          * @return {*}
          */
         getAllOptions: function() {
@@ -422,41 +426,22 @@
         },
 
         /**
-         * Set option
-         * @example $(element).bs_pagination('setOption', 'oprion_name',  'oprion_value',  reinit);
-         * @param opt
-         * @param val
-         * @param reinit
-         */
-        setOption: function(opt, val, reinit) {
-            var elem = this;
-            elem.data(pluginName)[opt] = val;
-            if(reinit) {
-                elem.bs_pagination('init');
-            }
-        },
-
-        /**
          * Destroy plugin
-         * @example $(element).bs_pagination('destroy');
-         * @return {*|jQuery}
+         * @example $(element).bs_pagination("destroy");
          */
         destroy: function() {
-            return $(this).each(function() {
-                var $this = $(this);
-
-                $this.removeData(pluginName);
-            });
+            var elem = this;
+            elem.removeData();
         },
 
         /**
          * Set rows info
-         * @example $(element).bs_pagination('setRowsInfo', info_html);
+         * @example $(element).bs_pagination("setRowsInfo", info_html);
          * @param info_html
          */
         setRowsInfo: function(info_html) {
             var elem = this,
-                rows_info_id = create_id(elem.bs_pagination('getOption', 'nav_rows_info_id_prefix'), $(this).attr("id"));
+                rows_info_id = create_id(methods.getOption.call(elem, "getOption", "nav_rows_info_id_prefix"), elem.attr("id"));
             $("#" + rows_info_id).html(info_html);
         }
     };
@@ -489,8 +474,8 @@
 
         // retrieve options, define variables
         var elem = $("#" + container_id),
-            s = $(elem).bs_pagination('getAllOptions'),
-            nav_item_id_prefix = create_id(s.nav_item_id_prefix, container_id) + '_';
+            s = methods.getAllOptions.call(elem),
+            nav_item_id_prefix = create_id(s.nav_item_id_prefix, container_id) + "_";
 
         if(update_nav_items) {
 
@@ -501,12 +486,12 @@
                 nav_last_id = create_id(s.nav_last_id_prefix, container_id),
 
                 elem_nav_list = $("#" + nav_list),
-                nav_html = '',
+                nav_html = "",
                 nav_start = parseInt(s.currentPage),
                 nav_end,
                 i, mod, offset, totalSections,
-                nav_url = '',
-                no_url = 'javascript:void(0);';
+                nav_url = "",
+                no_url = "javascript:void(0);";
 
             // navigation pages numbers
             if(s.totalPages < s.visiblePageLinks) {
@@ -525,8 +510,8 @@
             }
 
             // store nav_start nav_end
-            elem.data('nav_start', nav_start);
-            elem.data('nav_end', nav_end);
+            elem.data("nav_start", nav_start);
+            elem.data("nav_end", nav_end);
 
             // create nav pages html -----------------------------------------------
             // show - hide backward nav controls
@@ -561,26 +546,21 @@
             current_elem = $("#" + nav_item_id_prefix + current_selection);
 
         // change selected page, applying appropriate styles
-        if(s.bootstrap_version == "3") {
-            prev_elem.closest("li").removeClass(s.navListActiveItemClass);
-            current_elem.closest("li").addClass(s.navListActiveItemClass);
-        } else {
-            prev_elem.closest("li").removeClass(s.navListActiveItemClass2);
-            current_elem.closest("li").addClass(s.navListActiveItemClass2);
-        }
+        prev_elem.closest("li").removeClass(s.navListActiveItemClass);
+        current_elem.closest("li").addClass(s.navListActiveItemClass);
 
 
         // update title
-        var active_title = rsc_bs_pag.current_page_label + ' ' + current_selection + ' ' + rsc_bs_pag.total_pages_label + ' ' + s.totalPages;
+        var active_title = rsc_bs_pag.current_page_label + " " + current_selection + " " + rsc_bs_pag.total_pages_label + " " + s.totalPages;
         prev_elem.prop("title", "");
         current_elem.prop("title", active_title);
 
         if(s.showRowsInfo && s.showRowsDefaultInfo) {
             var page_first_row = ((s.currentPage - 1) * s.rowsPerPage) + 1,
                 page_last_row = Math.min(page_first_row + s.rowsPerPage - 1, s.totalRows),
-                info_html = page_first_row + '-' + page_last_row + ' ' +
-                    rsc_bs_pag.total_rows_label + ' ' + s.totalRows + ' ' + rsc_bs_pag.rows_info_records +
-                    ' (' + rsc_bs_pag.current_page_abbr_label + s.currentPage + rsc_bs_pag.total_pages_abbr_label + s.totalPages + ')',
+                info_html = page_first_row + "-" + page_last_row + " " +
+                    rsc_bs_pag.total_rows_label + " " + s.totalRows + " " + rsc_bs_pag.rows_info_records +
+                    " (" + rsc_bs_pag.current_page_abbr_label + s.currentPage + rsc_bs_pag.total_pages_abbr_label + s.totalPages + ")",
                 rows_info_id = create_id(s.nav_rows_info_id_prefix, container_id);
             $("#" + rows_info_id).html(info_html);
         }
@@ -592,7 +572,6 @@
             elem.triggerHandler("onLoad", {currentPage: current_selection, rowsPerPage: s.rowsPerPage});
         }
 
-
     };
 
     /**
@@ -603,9 +582,9 @@
      */
     var disableSelection = function(element) {
         return element
-            .attr('unselectable', 'on')
-            .css('user-select', 'none')
-            .on('selectstart', false);
+            .attr("unselectable", "on")
+            .css("user-select", "none")
+            .on("selectstart", false);
     };
 
     /**
@@ -617,7 +596,7 @@
     $.fn.bs_pagination = function(method) {
 
         if(this.size() != 1) {
-            var err_msg = 'You must use this plugin (' + pluginName + ') with a unique element (at once)';
+            var err_msg = "You must use this plugin (" + pluginName + ") with a unique element (at once)";
             this.html('<span style="color: red;">' + 'ERROR: ' + err_msg + '</span>');
             $.error(err_msg);
         }
@@ -625,10 +604,10 @@
         // Method calling logic
         if(methods[method]) {
             return methods[ method ].apply(this, Array.prototype.slice.call(arguments, 1));
-        } else if(typeof method === 'object' || !method) {
+        } else if(typeof method === "object" || !method) {
             return methods.init.apply(this, arguments);
         } else {
-            $.error('Method ' + method + ' does not exist on jQuery.' + pluginName);
+            $.error("Method " + method + " does not exist on jQuery." + pluginName);
         }
 
     };

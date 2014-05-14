@@ -3,7 +3,7 @@ bs_pagination
 
 jQuery pagination plugin, based on Twitter Bootstrap.
 
-Project page (soon): [https://www.pontikis.net/labs/bs_pagination][HOME]
+Project page: [https://www.pontikis.net/labs/bs_pagination][HOME]
 [HOME]: http://www.pontikis.net/labs/bs_pagination
 
 Copyright Christos Pontikis [http://www.pontikis.net][copyright]
@@ -11,6 +11,10 @@ Copyright Christos Pontikis [http://www.pontikis.net][copyright]
 
 License [MIT][mit]
 [mit]: https://raw.github.com/pontikis/bs_pagination/master/MIT_LICENSE
+
+Release 1.0.2 (09 May 2014)
+---------------------------
+* Various improvements
 
 Release 1.0.1 (29 Apr 2014)
 ---------------------------
