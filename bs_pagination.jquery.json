@@ -1,0 +1,32 @@
+{
+    "name": "bs_pagination",
+    "version": "1.0.2",
+    "title": "bootstrap pagination",
+    "author": {
+        "name": "Christos Pontikis",
+        "email": "christos@pontikis.net",
+        "url": "http://www.pontikis.net"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://raw.github.com/pontikis/bs_pagination/master/MIT_LICENSE"
+        }
+    ],
+    "dependencies": {
+        "jquery": ">=1.8"
+    },
+    "description": "jQuery plugin, provides pagination using page links or jQuery UI slider. Fully configurable. jQuery UI themes compatible. Localization support.",
+    "homepage": "http://www.pontikis.net/labs/bs_pagination",
+    "docs": "http://www.pontikis.net/labs/bs_pagination/docs",
+    "demo": "http://www.pontikis.net/labs/bs_pagination/demo",
+    "download": "https://github.com/pontikis/bs_pagination/archive/master.zip",
+    "keywords": [
+        "pagination",
+        "paginate",
+        "bootstrap",
+        "grid",
+        "ui"
+    ],
+    "bugs": "https://github.com/pontikis/bs_pagination/issues"
+}
